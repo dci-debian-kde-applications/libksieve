@@ -60,7 +60,9 @@ Description: Sieve mail filtering language support for kdepim, GUI library
 Package: libkf5ksieve-dev
 Section: libsdevel
 Architecture: any
-Depends: libkf5ksieve5 (= ${source:Version}),
+Depends: libkf5kmanagesieve5 (= ${binary:Version}),
+         libkf5ksieve5 (= ${binary:Version}),
+         libkf5ksieveui5 (= ${binary:Version}),
          ${misc:Depends},
          ${shlibs:Depends}
 Description: Sieve mail filtering language support for kdepim, development files

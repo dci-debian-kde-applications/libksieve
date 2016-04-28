@@ -6,6 +6,11 @@
 </version>
 
 <headers>
+    /usr/include/KF5/KManageSieve/
+    /usr/include/KF5/KSieveUi/
+    /usr/include/KF5/kmanagesieve/
+    /usr/include/KF5/ksieveui/
+    /usr/include/KF5/libksieve_version.h
 </headers>
 
 <libs>

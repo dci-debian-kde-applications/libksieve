@@ -86,9 +86,12 @@ Package: libkf5ksieve-dev
 Section: libdevel
 Architecture: any
 Multi-Arch: same
-Depends: libkf5kmanagesieve5 (= ${binary:Version}),
+Depends: libkf5akonadi-dev (>= 4:5.2.0~),
+         libkf5kmanagesieve5 (= ${binary:Version}),
          libkf5ksieve5 (= ${binary:Version}),
          libkf5ksieveui5 (= ${binary:Version}),
+         libkf5pimcommon-dev (>= 5.2.0~),
+         qtbase5-dev (>= 5.4.0~),
          ${misc:Depends},
          ${shlibs:Depends}
 Description: Sieve mail filtering language support for kdepim, development files

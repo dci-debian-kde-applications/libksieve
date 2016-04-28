@@ -29,6 +29,7 @@ Vcs-Git: https://anonscm.debian.org/git/pkg-kde/applications/libksieve.git
 
 Package: libkf5ksieve5
 Architecture: any
+Multi-Arch: same
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Description: Sieve mail filtering language support for kdepim, library
  This library implements a parser and lexer for Sieve, the mail filtering
@@ -38,6 +39,7 @@ Description: Sieve mail filtering language support for kdepim, library
 
 Package: libkf5kmanagesieve5
 Architecture: any
+Multi-Arch: same
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Description: Sieve remote script management support for kdepim, library
  This library implements a subset of the protocol for remotely managing Sieve
@@ -49,6 +51,7 @@ Description: Sieve remote script management support for kdepim, library
 
 Package: libkf5ksieveui5
 Architecture: any
+Multi-Arch: same
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Breaks: libksieveui5
 Replaces: libksieveui5
@@ -61,8 +64,9 @@ Description: Sieve mail filtering language support for kdepim, GUI library
  This package is part of the KDE PIM module.
 
 Package: libkf5ksieve-dev
-Section: libsdevel
+Section: libdevel
 Architecture: any
+Multi-Arch: same
 Depends: libkf5kmanagesieve5 (= ${binary:Version}),
          libkf5ksieve5 (= ${binary:Version}),
          libkf5ksieveui5 (= ${binary:Version}),

@@ -1,9 +1,10 @@
-libkf5ksieve (4:16.04.0-1~2.gbp7d907e) UNRELEASED; urgency=medium
+libkf5ksieve (4:16.04.1-1~1.gbp3e2b99) UNRELEASED; urgency=medium
 
-  ** SNAPSHOT build @7d907ed0d4e9f47d729ebd1dd7db7391d8abebec **
+  ** SNAPSHOT build @3e2b996fd6f72de4de5b5668917a2d6a762a98be **
 
   * Initial release.
   * Initial packaging
   * Add missing breaks/replaces
+  * UNRELEASED
 
- -- Maximiliano Curia <maxy@gnuservers.com.ar>  Thu, 28 Apr 2016 17:18:22 +0200
+ -- Maximiliano Curia <jenkins@amadeus.gnuservers.com.ar>  Tue, 10 May 2016 23:04:12 +0200

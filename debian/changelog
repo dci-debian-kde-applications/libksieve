@@ -1,10 +1,7 @@
-libkf5ksieve (4:16.04.1-1~1.gbp3e2b99) UNRELEASED; urgency=medium
-
-  ** SNAPSHOT build @3e2b996fd6f72de4de5b5668917a2d6a762a98be **
+libkf5ksieve (4:16.04.1-1) experimental; urgency=medium
 
   * Initial release.
-  * Initial packaging
   * Add missing breaks/replaces
-  * UNRELEASED
+  * Add upstream patch: upstream_add_copying_files.patch
 
- -- Maximiliano Curia <jenkins@amadeus.gnuservers.com.ar>  Tue, 10 May 2016 23:04:12 +0200
+ -- Maximiliano Curia <maxy@debian.org>  Sat, 04 Jun 2016 22:31:51 +0200

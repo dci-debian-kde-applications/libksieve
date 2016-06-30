@@ -1,10 +1,9 @@
-libkf5ksieve (4:16.04.2-1~1.gbpa5b88c) UNRELEASED; urgency=medium
+libkf5ksieve (4:16.04.2-1) experimental; urgency=medium
 
-  ** SNAPSHOT build @a5b88c17d52531cf6904810e3a5ba84ea9e2fb87 **
-
+  [ Automatic packaging ]
   * Refresh patches
 
- -- Automatic packaging <maxy+jenkins@gnuservers.com.ar>  Wed, 15 Jun 2016 05:04:12 +0200
+ -- Maximiliano Curia <maxy@debian.org>  Thu, 30 Jun 2016 14:17:43 +0200
 
 libkf5ksieve (4:16.04.1-1) experimental; urgency=medium
 

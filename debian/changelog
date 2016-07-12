@@ -1,3 +1,11 @@
+libkf5ksieve (4:16.04.3-1~1.gbpead762) UNRELEASED; urgency=medium
+
+  ** SNAPSHOT build @ead7624982d1520b79a31c182580e695fb7025d6 **
+
+  * UNRELEASED
+
+ -- Maximiliano Curia <jenkins@gnuservers.com.ar>  Tue, 12 Jul 2016 23:04:19 +0200
+
 libkf5ksieve (4:16.04.2-2) unstable; urgency=low
 
   * Release to unstable.

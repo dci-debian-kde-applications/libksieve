@@ -1,10 +1,17 @@
-libkf5ksieve (4:16.04.3-1~1.gbpead762) UNRELEASED; urgency=medium
+libkf5ksieve (4:16.08.0-1~1.gbp1935d2) UNRELEASED; urgency=medium
 
+  ** SNAPSHOT build @1935d2c035021acc975832a1d83c32b6c5412bcc **
+
+  [ Maximiliano Curia ]
   ** SNAPSHOT build @ead7624982d1520b79a31c182580e695fb7025d6 **
 
   * UNRELEASED
 
- -- Maximiliano Curia <jenkins@gnuservers.com.ar>  Tue, 12 Jul 2016 23:04:19 +0200
+  [ Automatic packaging ]
+  * Update build-deps and deps with the info from cmake
+  * Refresh patches
+
+ -- Automatic packaging <maxy+jenkins@gnuservers.com.ar>  Thu, 18 Aug 2016 23:04:17 +0200
 
 libkf5ksieve (4:16.04.2-2) unstable; urgency=low
 

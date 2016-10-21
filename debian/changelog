@@ -1,3 +1,10 @@
+libkf5ksieve (4:16.04.3-1~) UNRELEASED; urgency=medium
+
+  * New upstream release (16.04.3)
+    (Closes: 841458) Thanks to Maximilian Engelhardt for the report
+
+ -- Maximiliano Curia <maxy@debian.org>  Fri, 21 Oct 2016 10:45:14 +0200
+
 libkf5ksieve (4:16.04.2-2) unstable; urgency=low
 
   * Release to unstable.

@@ -1,1 +1,6 @@
 upstream_add_copying_files.patch
+8fb8219_reconnect_socket.patch
+ee4afdd-fix-race-while-handling-ssl-errors.patch
+6862737-dont-call-connecttohost-twice.patch
+9bbf8a1-add-return-in-case-waiting-for-data.patch
+3176d1c-only-set-connected-once-ready.patch

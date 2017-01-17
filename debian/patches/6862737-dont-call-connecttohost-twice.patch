@@ -1,0 +1,109 @@
+From 6862737561a9ee5fadcd78bd0655d0b45c893534 Mon Sep 17 00:00:00 2001
+From: David Faure <faure@kde.org>
+Date: Thu, 14 Jul 2016 16:53:18 +0200
+Subject: KSieve: don't call connectToHost twice for each host on startup.
+
+Summary:
+The code to reconnect after a disconnect shouldn't just assume
+that "m_connected == false" means we're disconnected. There's a 3rd case:
+we are trying to connect. So I introduced another boolean, m_disconnected.
+
+When disconnected, m_connected == false, m_disconnected == true.
+While trying to connect, m_connected == false, m_disconnected == false.
+When connected, m_connected == true, m_disconnected == false.
+
+Test Plan: Watching kmail's debug output
+
+Reviewers: mlaurent
+
+Subscribers: #kde_pim
+
+Differential Revision: https://phabricator.kde.org/D2172
+---
+ src/kmanagesieve/session.cpp  | 9 ++++++---
+ src/kmanagesieve/session.h    | 6 +++++-
+ src/kmanagesieve/sievejob.cpp | 2 +-
+ 3 files changed, 12 insertions(+), 5 deletions(-)
+
+diff --git a/src/kmanagesieve/session.cpp b/src/kmanagesieve/session.cpp
+index 7a858e5..53164c8 100644
+--- a/src/kmanagesieve/session.cpp
++++ b/src/kmanagesieve/session.cpp
+@@ -48,7 +48,8 @@ Session::Session(QObject *parent) :
+     m_currentJob(Q_NULLPTR),
+     m_state(None),
+     m_supportsStartTls(false),
+-    m_connected(false)
++    m_connected(false),
++    m_disconnected(true)
+ {
+     qRegisterMetaType<KManageSieve::AuthDetails>();
+     qRegisterMetaType<KManageSieve::Response>();
+@@ -71,6 +72,7 @@ Session::Session(QObject *parent) :
+     connect(m_thread, &SessionThread::socketDisconnected,
+     [ = ]() {
+         m_connected = false;
++        m_disconnected = true;
+     });
+ }
+ 
+@@ -84,6 +86,7 @@ void Session::connectToHost(const QUrl &url)
+ {
+     qCDebug(KMANAGERSIEVE_LOG) << "connect to host url: " << url;
+     m_url = url;
++    m_disconnected = false;
+     m_thread->connectToHost(url);
+     m_state = PreTlsCapabilities;
+ }
+@@ -227,9 +230,9 @@ void Session::executeNextJob()
+     m_currentJob->d->run(this);
+ }
+ 
+-bool Session::connected() const
++bool Session::disconnected() const
+ {
+-    return m_connected;
++    return m_disconnected;
+ }
+ 
+ QStringList Session::sieveExtensions() const
+diff --git a/src/kmanagesieve/session.h b/src/kmanagesieve/session.h
+index d3127c4..8a582ba 100644
+--- a/src/kmanagesieve/session.h
++++ b/src/kmanagesieve/session.h
+@@ -66,7 +66,10 @@ public:
+ 
+     QStringList sieveExtensions() const;
+ 
+-    bool connected() const;
++    /**
++     * @return true if we are not connected nor currently connecting, i.e. it's ok to call connectToHost()
++     */
++    bool disconnected() const;
+ 
+ private:
+     bool requestCapabilitiesAfterStartTls() const;
+@@ -102,6 +105,7 @@ private:
+     State m_state;
+     bool m_supportsStartTls;
+     bool m_connected;
++    bool m_disconnected;
+ 
+     friend class SessionThread;
+ };
+diff --git a/src/kmanagesieve/sievejob.cpp b/src/kmanagesieve/sievejob.cpp
+index eef58dd..dd7ec67 100644
+--- a/src/kmanagesieve/sievejob.cpp
++++ b/src/kmanagesieve/sievejob.cpp
+@@ -36,7 +36,7 @@ Session *SieveJob::Private::sessionForUrl(const QUrl &url)
+         m_sessionPool.insert(hostUrl, sessionPtr);
+         sessionPtr->connectToHost(hostUrl);
+     } else {
+-        if (!sessionPtr->connected()) {
++        if (sessionPtr->disconnected()) {
+             sessionPtr->connectToHost(hostUrl);
+         }
+     }
+-- 
+cgit v0.11.2
+

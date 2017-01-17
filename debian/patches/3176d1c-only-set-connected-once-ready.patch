@@ -1,0 +1,32 @@
+From 3176d1cdf6e36429ac9c6b4ee79b37c22b4273c9 Mon Sep 17 00:00:00 2001
+From: David Faure <faure@kde.org>
+Date: Fri, 15 Jul 2016 15:39:06 +0200
+Subject: KManageSieve::Session: only set m_connected once we're ready to go.
+
+Otherwise when doing StartTls and setting m_state to None, the first
+job can get started too early (easier to trigger in valgrind).
+---
+ src/kmanagesieve/session.cpp | 5 +----
+ 1 file changed, 1 insertion(+), 4 deletions(-)
+
+--- a/src/kmanagesieve/session.cpp
++++ b/src/kmanagesieve/session.cpp
+@@ -65,10 +65,6 @@
+             this, &Session::sslError);
+     connect(m_thread, &SessionThread::sslDone,
+             this, &Session::sslDone);
+-    connect(m_thread, &SessionThread::socketConnected,
+-    [ = ]() {
+-        m_connected = true;
+-    });
+     connect(m_thread, &SessionThread::socketDisconnected,
+     [ = ]() {
+         m_connected = false;
+@@ -312,6 +308,7 @@
+ void Session::authenticationDone()
+ {
+     m_state = None;
++    m_connected = true;
+     QMetaObject::invokeMethod(this, "executeNextJob", Qt::QueuedConnection);
+ }
+ 

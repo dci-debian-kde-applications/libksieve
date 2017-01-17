@@ -1,0 +1,58 @@
+From 8fb821950bd8caae0c4a86e1d2ecb4caabab1689 Mon Sep 17 00:00:00 2001
+From: Montel Laurent <montel@kde.org>
+Date: Fri, 1 Jul 2016 23:11:11 +0200
+Subject: Reconnect socket
+
+---
+ src/kmanagesieve/session.cpp  | 5 +++++
+ src/kmanagesieve/session.h    | 2 ++
+ src/kmanagesieve/sievejob.cpp | 4 ++++
+ 3 files changed, 11 insertions(+)
+
+diff --git a/src/kmanagesieve/session.cpp b/src/kmanagesieve/session.cpp
+index b45237c..7c38273 100644
+--- a/src/kmanagesieve/session.cpp
++++ b/src/kmanagesieve/session.cpp
+@@ -227,6 +227,11 @@ void Session::executeNextJob()
+     m_currentJob->d->run(this);
+ }
+ 
++bool Session::connected() const
++{
++    return m_connected;
++}
++
+ QStringList Session::sieveExtensions() const
+ {
+     return m_sieveExtensions;
+diff --git a/src/kmanagesieve/session.h b/src/kmanagesieve/session.h
+index c507069..d3127c4 100644
+--- a/src/kmanagesieve/session.h
++++ b/src/kmanagesieve/session.h
+@@ -66,6 +66,8 @@ public:
+ 
+     QStringList sieveExtensions() const;
+ 
++    bool connected() const;
++
+ private:
+     bool requestCapabilitiesAfterStartTls() const;
+ 
+diff --git a/src/kmanagesieve/sievejob.cpp b/src/kmanagesieve/sievejob.cpp
+index 92d75a5..2a90abf 100644
+--- a/src/kmanagesieve/sievejob.cpp
++++ b/src/kmanagesieve/sievejob.cpp
+@@ -35,6 +35,10 @@ Session *SieveJob::Private::sessionForUrl(const QUrl &url)
+         sessionPtr = QPointer<Session>(new Session());
+         m_sessionPool.insert(hostUrl, sessionPtr);
+         sessionPtr->connectToHost(hostUrl);
++    } else {
++        if (!sessionPtr->connected()) {
++            sessionPtr->connectToHost(hostUrl);
++        }
+     }
+     return sessionPtr.data();
+ }
+-- 
+cgit v0.11.2
+

@@ -1,0 +1,27 @@
+From 9bbf8a1dd9f3683000228773eef5dbeb12e0d008 Mon Sep 17 00:00:00 2001
+From: David Faure <faure@kde.org>
+Date: Thu, 14 Jul 2016 12:55:41 +0200
+Subject: KSieve: add return in case we're waiting for more data for
+ "quantity".
+
+Differential Revision: https://phabricator.kde.org/D2163
+---
+ src/kmanagesieve/sessionthread.cpp | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/src/kmanagesieve/sessionthread.cpp b/src/kmanagesieve/sessionthread.cpp
+index a38d31a..d344453 100644
+--- a/src/kmanagesieve/sessionthread.cpp
++++ b/src/kmanagesieve/sessionthread.cpp
+@@ -175,6 +175,8 @@ void SessionThread::slotDataReceived()
+         if (m_pendingQuantity <= 0) {
+             qCDebug(KMANAGERSIEVE_LOG) << "S: " << m_data.trimmed();
+             Q_EMIT responseReceived(m_lastResponse, m_data);
++        } else {
++            return; // waiting for more data
+         }
+     }
+ 
+-- 
+cgit v0.11.2
+

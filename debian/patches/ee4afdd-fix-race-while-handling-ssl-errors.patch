@@ -1,0 +1,103 @@
+From ee4afdd78597cb9379a39951b9eca94a8e927f98 Mon Sep 17 00:00:00 2001
+From: David Faure <faure@kde.org>
+Date: Thu, 14 Jul 2016 14:13:24 +0200
+Subject: KSieve Session: fix race while handling SSL errors.
+
+Summary:
+No need to post a request to the thread for handling an ignored ssl error,
+which the thread will simply handle by emitting the sslDone signal,
+which goes back to the main thread. By doing that we were making it possible
+for the thread to emit other things meanwhile - like the received data from the server,
+out of sequence (the main thread can only handle it after receiving sslDone)
+
+This fixes the never-ending spinning in "Manage Sieve Scripts" in kmail
+for me (which happened about 20% of the time).
+
+BUG: 232246
+
+Test Plan: Manage Sieve Scripts in kmail, > 5 times.
+
+Reviewers: dvratil, mlaurent
+
+Reviewed By: mlaurent
+
+Subscribers: kde-pim, #kde_pim
+
+Tags: #kde_pim
+
+Differential Revision: https://phabricator.kde.org/D2167
+---
+ src/kmanagesieve/session.cpp       |  6 +++++-
+ src/kmanagesieve/sessionthread.cpp | 21 ---------------------
+ src/kmanagesieve/sessionthread_p.h |  2 --
+ 3 files changed, 5 insertions(+), 24 deletions(-)
+
+diff --git a/src/kmanagesieve/session.cpp b/src/kmanagesieve/session.cpp
+index 7c38273..7a858e5 100644
+--- a/src/kmanagesieve/session.cpp
++++ b/src/kmanagesieve/session.cpp
+@@ -315,7 +315,11 @@ void Session::authenticationDone()
+ void Session::sslError(const KSslErrorUiData &data)
+ {
+     const bool ignore = KIO::SslUi::askIgnoreSslErrors(data);
+-    m_thread->handleSslErrorResponse(ignore);
++    if (ignore) {
++        sslDone();
++    } else {
++        m_thread->disconnectFromHost(true);
++    }
+ }
+ 
+ void Session::sslDone()
+diff --git a/src/kmanagesieve/sessionthread.cpp b/src/kmanagesieve/sessionthread.cpp
+index c97cd11..a38d31a 100644
+--- a/src/kmanagesieve/sessionthread.cpp
++++ b/src/kmanagesieve/sessionthread.cpp
+@@ -495,24 +495,3 @@ void SessionThread::sslResult(bool encrypted)
+         Q_EMIT sslDone();
+     }
+ }
+-
+-// Called in main thread
+-void SessionThread::handleSslErrorResponse(bool response)
+-{
+-    QMetaObject::invokeMethod(this, "doHandleSslErrorResponse",
+-                              Qt::QueuedConnection,
+-                              Q_ARG(bool, response));
+-}
+-
+-// Called in secondary thread
+-void SessionThread::doHandleSslErrorResponse(bool response)
+-{
+-    Q_ASSERT(QThread::currentThread() == thread());
+-
+-    if (!response) {
+-        doDisconnectFromHost(true);
+-        return;
+-    }
+-
+-    Q_EMIT sslDone();
+-}
+diff --git a/src/kmanagesieve/sessionthread_p.h b/src/kmanagesieve/sessionthread_p.h
+index db89ea2..d607c2b 100644
+--- a/src/kmanagesieve/sessionthread_p.h
++++ b/src/kmanagesieve/sessionthread_p.h
+@@ -54,7 +54,6 @@ public:
+     void continueAuthentication(const Response &response, const QByteArray &data);
+ 
+     void startSsl();
+-    void handleSslErrorResponse(bool response);
+ 
+ Q_SIGNALS:
+     void responseReceived(const KManageSieve::Response &response, const QByteArray &data);
+@@ -76,7 +75,6 @@ private Q_SLOTS:
+     void doStartAuthentication();
+     void doContinueAuthentication(const KManageSieve::Response &response, const QByteArray &data);
+     void doStartSsl();
+-    void doHandleSslErrorResponse(bool response);
+ 
+     void slotDataReceived();
+     void slotSocketError();
+-- 
+cgit v0.11.2
+

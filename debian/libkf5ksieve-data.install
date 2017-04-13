@@ -1,4 +1,5 @@
 etc/xdg/ksieve_script.knsrc
-etc/xdg/libksieve.renamecategories
 etc/xdg/libksieve.categories
+etc/xdg/libksieve.renamecategories
+usr/share/locale/*/LC_MESSAGES/libksieve.mo
 usr/share/sieve/

@@ -108,8 +108,8 @@ Package: kio-sieve
 Architecture: any
 Multi-Arch: no
 Depends: ${misc:Depends}, ${shlibs:Depends}
-Replaces: kdepimlibs-kio-plugins, kf5-kdepimlibs-kio-plugins
-Breaks: kdepimlibs-kio-plugins, kf5-kdepimlibs-kio-plugins
+Replaces: kdepimlibs-kio-plugins, kf5-kdepimlibs-kio-plugins, ${kde-l10n:all}
+Breaks: kdepimlibs-kio-plugins, kf5-kdepimlibs-kio-plugins, ${kde-l10n:all}
 Description: Sieve mail filtering language support for kdepim, development files
  This library implements a parser and lexer for Sieve, the mail filtering
  language (RFC 3028).

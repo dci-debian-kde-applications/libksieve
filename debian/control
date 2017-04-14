@@ -48,8 +48,8 @@ Package: libkf5ksieve-data
 Architecture: all
 Multi-Arch: foreign
 Depends: ${misc:Depends}
-Breaks: kmail (<= 4:16.04), libkf5ksieveui5 (<= 4:16.04)
-Replaces: kmail (<= 4:16.04), libkf5ksieveui5 (<= 4:16.04)
+Breaks: kmail (<= 4:16.04), libkf5ksieveui5 (<= 4:16.04), ${kde-l10n:all}
+Replaces: kmail (<= 4:16.04), libkf5ksieveui5 (<= 4:16.04), ${kde-l10n:all}
 Description: Sieve mail filtering language support for kdepim, data files
  This library implements a parser and lexer for Sieve, the mail filtering
  language (RFC 3028).

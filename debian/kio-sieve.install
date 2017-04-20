@@ -1,5 +1,5 @@
 usr/lib/*/qt5/plugins/kf5/kio/sieve.so
-usr/share/doc/HTML/en/kioslave5/sieve/index.cache.bz2
-usr/share/doc/HTML/en/kioslave5/sieve/index.docbook
+usr/share/doc/HTML/*/kioslave5/sieve/index.cache.bz2
+usr/share/doc/HTML/*/kioslave5/sieve/index.docbook
 usr/share/kservices5/sieve.protocol
 usr/share/locale/*/LC_MESSAGES/kio_sieve.mo

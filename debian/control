@@ -24,7 +24,9 @@ Build-Depends: cmake (>= 2.8.12~),
                libqt5webkit5-dev (>= 5.4.0~),
                pkg-kde-tools (>= 0.12),
                qtbase5-dev (>= 5.6.0~),
-               qttools5-dev (>= 5.4.0~)
+               libqt5webchannel5-dev | libqt5webchannel-dev,
+               qttools5-dev (>= 5.4.0~),
+               qtwebengine5-dev | libqt5webengine5-dev
 Standards-Version: 3.9.8
 Homepage: http://pim.kde.org/
 Vcs-Browser: https://anonscm.debian.org/git/pkg-kde/applications/libksieve.git
@@ -46,8 +48,8 @@ Package: libkf5ksieve-data
 Architecture: all
 Multi-Arch: foreign
 Depends: ${misc:Depends}
-Breaks: kmail (<= 4:16.04), libkf5ksieveui5 (<= 4:16.04)
-Replaces: kmail (<= 4:16.04), libkf5ksieveui5 (<= 4:16.04)
+Breaks: kmail (<= 4:16.04), libkf5ksieveui5 (<= 4:16.04), ${kde-l10n:all}
+Replaces: kmail (<= 4:16.04), libkf5ksieveui5 (<= 4:16.04), ${kde-l10n:all}
 Description: Sieve mail filtering language support for kdepim, data files
  This library implements a parser and lexer for Sieve, the mail filtering
  language (RFC 3028).
@@ -99,5 +101,19 @@ Depends: libkf5akonadi-dev (>= 4:5.3.1~),
 Description: Sieve mail filtering language support for kdepim, development files
  This library implements a parser and lexer for Sieve, the mail filtering
  language (RFC 3028).
+ .
+ This package is part of the KDE PIM module.
+
+Package: kio-sieve
+Architecture: any
+Multi-Arch: no
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Replaces: kdepimlibs-kio-plugins, kf5-kdepimlibs-kio-plugins, ${kde-l10n:all}
+Breaks: kdepimlibs-kio-plugins, kf5-kdepimlibs-kio-plugins, ${kde-l10n:all}
+Description: Sieve mail filtering language support for kdepim, development files
+ This library implements a parser and lexer for Sieve, the mail filtering
+ language (RFC 3028).
+ .
+ This package contains the kio slave for ksieve
  .
  This package is part of the KDE PIM module.

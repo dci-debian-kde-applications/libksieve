@@ -39,8 +39,16 @@ Package: kio-sieve
 Architecture: any
 Multi-Arch: no
 Depends: ${misc:Depends}, ${shlibs:Depends}
-Replaces: kdepimlibs-kio-plugins, kf5-kdepimlibs-kio-plugins, ${kde-l10n:all}
-Breaks: kdepimlibs-kio-plugins, kf5-kdepimlibs-kio-plugins, ${kde-l10n:all}
+Replaces: kde-l10n-ast (<< 4:17.03.90-0~),
+          kde-l10n-eo (<< 4:17.03.90-0~),
+          kdepimlibs-kio-plugins,
+          kf5-kdepimlibs-kio-plugins,
+          ${kde-l10n:all},
+Breaks: kde-l10n-ast (<< 4:17.03.90-0~),
+        kde-l10n-eo (<< 4:17.03.90-0~),
+        kdepimlibs-kio-plugins,
+        kf5-kdepimlibs-kio-plugins,
+        ${kde-l10n:all},
 Description: Sieve mail filtering language support for kdepim, development files
  This library implements a parser and lexer for Sieve, the mail filtering
  language (RFC 3028).
@@ -67,8 +75,16 @@ Package: libkf5ksieve-data
 Architecture: all
 Multi-Arch: foreign
 Depends: ${misc:Depends}
-Breaks: kmail (<= 4:16.04), libkf5ksieveui5 (<= 4:16.04), ${kde-l10n:all}
-Replaces: kmail (<= 4:16.04), libkf5ksieveui5 (<= 4:16.04), ${kde-l10n:all}
+Breaks: kde-l10n-ast (<< 4:17.03.90-0~),
+        kde-l10n-eo (<< 4:17.03.90-0~),
+        kmail (<= 4:16.04),
+        libkf5ksieveui5 (<= 4:16.04),
+        ${kde-l10n:all},
+Replaces: kde-l10n-ast (<< 4:17.03.90-0~),
+          kde-l10n-eo (<< 4:17.03.90-0~),
+          kmail (<= 4:16.04),
+          libkf5ksieveui5 (<= 4:16.04),
+          ${kde-l10n:all},
 Description: Sieve mail filtering language support for kdepim, data files
  This library implements a parser and lexer for Sieve, the mail filtering
  language (RFC 3028).

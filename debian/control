@@ -70,6 +70,7 @@ Description: Sieve remote script management support for kdepim, library
  the remote Sieve script server.
  .
  This package is part of the KDE PIM module.
+Breaks: kmail (<< 4:17.08)
 
 Package: libkf5ksieve-data
 Architecture: all
@@ -136,3 +137,4 @@ Description: Sieve mail filtering language support for kdepim, GUI library
  scripts (RFC 5804).
  .
  This package is part of the KDE PIM module.
+Breaks: kmail (<< 4:17.08)

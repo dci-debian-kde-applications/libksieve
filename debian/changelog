@@ -98,6 +98,24 @@ libkf5ksieve (4:16.08.0-0neon) xenial; urgency=medium
 
  -- Neon CI <neon@kde.org>  Wed, 17 Aug 2016 11:50:35 +0000
 
+libkf5ksieve (4:16.04.3-2) unstable; urgency=medium
+
+  * Team upload
+
+  [ Didier Raboud ]
+  * Backport 5 upstream patches to fix connection unreliability after
+    some time, thanks to Maximilian Engelhardt for the report and
+    pointing to the commits (Closes: #850462)
+
+ -- Didier Raboud <odyx@debian.org>  Wed, 25 Jan 2017 18:36:05 +0100
+
+libkf5ksieve (4:16.04.3-1) unstable; urgency=medium
+
+  * New upstream release (16.04.3)
+    (Closes: 841458) Thanks to Maximilian Engelhardt for the report
+
+ -- Maximiliano Curia <maxy@debian.org>  Fri, 21 Oct 2016 11:01:32 +0200
+
 libkf5ksieve (4:16.04.3-0neon) xenial; urgency=medium
 
   * New release

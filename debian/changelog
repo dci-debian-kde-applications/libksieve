@@ -1,8 +1,10 @@
-libkf5ksieve (4:17.08.0-1~) UNRELEASED; urgency=medium
+libkf5ksieve (4:17.08.0-1) experimental; urgency=medium
 
   * New upstream release (17.08.0)
+  * Update copyright file
+  * Release to experimental
 
- -- Maximiliano Curia <maxy@debian.org>  Wed, 23 Aug 2017 11:27:06 +0200
+ -- Maximiliano Curia <maxy@debian.org>  Fri, 01 Sep 2017 22:08:41 +0200
 
 libkf5ksieve (4:17.08.0-0neon) xenial; urgency=medium
 

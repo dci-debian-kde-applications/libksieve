@@ -5,6 +5,9 @@ libkf5ksieve (4:17.08.3-2) UNRELEASED; urgency=medium
     for kdepimlibs 4.x.
   * Simplify watch file, and switch it to https.
 
+  [ Sandro Knauß ]
+  * mark kio-sieve as Multi-Arch: same instead of no
+
  -- Debian/Kubuntu Qt/KDE Maintainers <debian-qt-kde@lists.debian.org>  Tue, 26 Dec 2017 01:21:06 +0100
 
 libkf5ksieve (4:17.08.3-1) unstable; urgency=medium
